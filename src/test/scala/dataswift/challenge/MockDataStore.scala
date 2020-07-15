@@ -5,7 +5,7 @@ import cats.effect.{Effect, IO}
 import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
 
-object  MockDataStore {
+case class MockDataStore() {
 
   val storedUsers = new ArrayBuffer[User]()
   var lastUpdateValue: LastUpdate = _

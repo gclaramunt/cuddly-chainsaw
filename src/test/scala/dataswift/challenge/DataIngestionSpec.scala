@@ -45,18 +45,19 @@ class DataIngestionSpec extends Specification {
 
     "userIngestionFlow" in {
 
-      MockDataStore.storedUsers.clear()
-      ingestion.userIngestionFlow(MockDataStore.ds).unsafeRunSync()
+      val mockDataStore = MockDataStore()
 
-      MockDataStore.storedUsers should_== List(
+      ingestion.userIngestionFlow(mockDataStore.ds).unsafeRunSync()
+
+      mockDataStore.storedUsers should_== List(
         User(1, "mojombo","https://api.github.com/users/mojombo/orgs"),
         User(2, "defunkt","https://api.github.com/users/defunkt/orgs"),
         User(3, "pjhyett","https://api.github.com/users/pjhyett/orgs"),
         User(4, "wycats","https://api.github.com/users/wycats/orgs"),
       ).to[ArrayBuffer]
 
-      MockDataStore.lastUpdateValue.lastId should_== 4
-      MockDataStore.lastUpdateValue.resource should_== "User"
+      mockDataStore.lastUpdateValue.lastId should_== 4
+      mockDataStore.lastUpdateValue.resource should_== "User"
 
     }
   }

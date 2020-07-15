@@ -22,6 +22,8 @@ class ChallengeWebServiceSpec extends Specification {
   "ChallengeWebService" should {
     "Get stored GH users list" in {
 
+      val mockDataStore = MockDataStore()
+
       val data = List(
         User(1, "mojombo","https://api.github.com/users/mojombo/orgs"),
         User(2, "defunkt","https://api.github.com/users/defunkt/orgs"),
@@ -29,11 +31,10 @@ class ChallengeWebServiceSpec extends Specification {
         User(4, "wycats","https://api.github.com/users/wycats/orgs"),
       )
 
-      MockDataStore.storedUsers.clear()
-      MockDataStore.storedUsers ++= data.to[ArrayBuffer]
+      mockDataStore.storedUsers ++= data.to[ArrayBuffer]
 
       val get = Request[IO](Method.GET, uri"/challenge")
-      val response = new ChallengeWebService(MockDataStore.ds).service.run(get).unsafeRunSync()
+      val response = new ChallengeWebService(mockDataStore.ds).service.run(get).unsafeRunSync()
 
       response.as[Json].unsafeRunSync() should_== data.asJson
     }
