@@ -2,7 +2,6 @@ package dataswift.challenge
 
 import cats.effect._
 import cats.implicits._
-import org.http4s.Uri
 import org.http4s.circe._
 import org.http4s.client.Client
 import org.http4s.client.blaze._

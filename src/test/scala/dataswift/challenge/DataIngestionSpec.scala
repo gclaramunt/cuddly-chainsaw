@@ -1,17 +1,11 @@
 package dataswift.challenge
 
-import cats.effect.{ContextShift, Effect, ExitCode, IO, Resource, Timer}
-import org.http4s.{HttpRoutes, Uri}
-import org.http4s.client.Client
+import cats.effect.{ContextShift, Effect, ExitCode, IO, Timer}
 import org.http4s.dsl.Http4sDsl
-import org.specs2.mutable.Specification
 import org.http4s.implicits._
 import org.http4s.server.blaze.BlazeServerBuilder
-
-import scala.concurrent.ExecutionContext.global
-import cats.implicits._
-import doobie.Transactor
-import org.specs2.specification.{AfterAll, BeforeAfterAll}
+import org.http4s.{HttpRoutes, Uri}
+import org.specs2.mutable.Specification
 
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.ExecutionContext.global
